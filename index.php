@@ -57,21 +57,21 @@ $set_vote = isset($_GET["hotel_vote"]);
 
     <div class="container">
         <div class="my-3">
-            <h4 class="text-center my-2">
+            <h4 class="text-center mt-2 mb-4">
                 Trova l'hotel che fa per te!
             </h4>
-            <form action="" class="text-center d-flex flex-column gap-3 w-50 mx-auto" method="GET">
+            <form style="max-width: fit-content" action="" class="text-center d-flex flex-column gap-3 mx-auto" method="GET">
                 <div>
                     <label for="parking">
-                        Hotel con parcheggio
+                        Parcheggio
                     </label>
                     <input type="checkbox" name="parking" id="parking">
                 </div>
-                <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center justify-content-between gap-3">
                     <label for="hotel_vote">
-                        Hotel con voto di almeno
+                        Voto minimo
                     </label>
-                    <select class="form-select" 
+                    <select class="form-select"
                     style="max-width: fit-content"
                     name="hotel_vote"
                     id="hotel_vote">
@@ -85,7 +85,7 @@ $set_vote = isset($_GET["hotel_vote"]);
                         ?>
                         </select>
                 </div>
-                <button type="submit" class="btn btn-primary w-25 mx-auto">
+                <button type="submit" class="btn btn-primary mx-auto">
                     Filtra
                 </button>
             </form>
@@ -141,11 +141,5 @@ $set_vote = isset($_GET["hotel_vote"]);
             </tbody>
         </table>
     </div>
-
-    <?php
-
-    
-
-?>
 </body>
 </html>
