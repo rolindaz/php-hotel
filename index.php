@@ -54,6 +54,25 @@ $hotels = [
     </h1>
 
     <div class="container">
+        <div class="my-3">
+            <h4 class="text-center my-2">
+                Trova l'hotel che fa per te!
+            </h4>
+            <form action="" class="d-flex flex-column gap-3" method="GET">
+                <div>
+                    <label for="">
+                        Hotel con parcheggio
+                    </label>
+                    <input type="checkbox" name="parking" id="">
+            <?php
+            $parking = isset($_GET["parking"]);
+            ?>
+                </div>
+                <button type="submit" class="btn btn-primary w-25">
+                    Cerca
+                </button>
+            </form>
+        </div>
         <table class="table table-bordered mx-auto">
             <thead>
                 <tr>
@@ -67,15 +86,25 @@ $hotels = [
                 </tr>
             </thead>
             <tbody>
-                    <?php
-                        foreach($hotels as $hotel) {
+            <?php
+                if ($parking) foreach($hotels as $hotel) {
                             echo "<tr>";
                             foreach($hotel as $key => $value) {
-                                echo "<td>$value</td>";
+                                if($hotel["parking"] === true) {
+                                    echo "<td>$value</td>";
+                                }
                             };
                             echo "</tr>";
+                        } else {
+                            foreach($hotels as $hotel) {
+                                echo "<tr>";
+                                foreach($hotel as $key => $value) {
+                                    echo "<td>$value</td>";
+                                };
+                                echo "</tr>";
+                            }
                         }
-                    ?>
+            ?>
             </tbody>
         </table>
     </div>
