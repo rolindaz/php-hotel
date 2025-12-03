@@ -38,6 +38,8 @@ $hotels = [
     ],
 
 ];
+$parking = isset($_GET["parking"]);
+$set_vote = isset($_GET["hotel_vote"]);
 ?>
 
 <!DOCTYPE html>
@@ -58,18 +60,33 @@ $hotels = [
             <h4 class="text-center my-2">
                 Trova l'hotel che fa per te!
             </h4>
-            <form action="" class="d-flex flex-column gap-3" method="GET">
+            <form action="" class="text-center d-flex flex-column gap-3 w-50 mx-auto" method="GET">
                 <div>
-                    <label for="">
+                    <label for="parking">
                         Hotel con parcheggio
                     </label>
-                    <input type="checkbox" name="parking" id="">
-            <?php
-            $parking = isset($_GET["parking"]);
-            ?>
+                    <input type="checkbox" name="parking" id="parking">
                 </div>
-                <button type="submit" class="btn btn-primary w-25">
-                    Cerca
+                <div class="d-flex align-items-center justify-content-between">
+                    <label for="hotel_vote">
+                        Hotel con voto di almeno
+                    </label>
+                    <select class="form-select" 
+                    style="max-width: fit-content"
+                    name="hotel_vote"
+                    id="hotel_vote">
+                    <option selected>
+                    </option>
+                        <?php
+                        for($i=1; $i<=5; $i++) {
+                            echo "<option>$i</option>";
+                        };
+                        $req_vote = $_GET["hotel_vote"];
+                        ?>
+                        </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-25 mx-auto">
+                    Filtra
                 </button>
             </form>
         </div>
@@ -87,10 +104,26 @@ $hotels = [
             </thead>
             <tbody>
             <?php
-                if ($parking) foreach($hotels as $hotel) {
+            if ($parking && $set_vote) foreach($hotels as $hotel) {
+                echo "<tr>";
+                foreach($hotel as $key => $value) {
+                    if($hotel["parking"] === true && $hotel["vote"] >= $req_vote) {
+                        echo "<td>$value</td>";
+                    }
+                };
+                echo "</tr>";
+            } else if ($parking) foreach($hotels as $hotel) {
                             echo "<tr>";
                             foreach($hotel as $key => $value) {
                                 if($hotel["parking"] === true) {
+                                    echo "<td>$value</td>";
+                                }
+                            };
+                            echo "</tr>";
+                        } else if ($set_vote) foreach($hotels as $hotel) {
+                            echo "<tr>";
+                            foreach($hotel as $key => $value) {
+                                if($hotel["vote"] >= $req_vote) {
                                     echo "<td>$value</td>";
                                 }
                             };
